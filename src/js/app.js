@@ -4,6 +4,7 @@ class App {
   constructor() {
     this.mainTag = document.querySelector('#main');
     this.toolbar = null;
+    this.canvas = null;
   }
 
   render() {
@@ -15,8 +16,8 @@ class App {
   template() {
     return (
       `<header><h1>Ascii Art</h1></header>
-      <section id="toolbar"></section>
-      <section id="workspace"></section>`
+      <section id="toolbar" class="toolbar"></section>
+      <section id="workspace" class="workspace"></section>`
     );
   }
 
@@ -33,8 +34,13 @@ class App {
     const oldCanvas = document.getElementsByTagName('canvas')[0];
     if (oldCanvas)
       oldCanvas.remove();
-    const canvas = new Canvas(img, 'workspace');
-    canvas.draw();
+    this.canvas = new Canvas(img, 'workspace');
+    this.canvas.draw();
+  }
+
+  convertoAscii() {
+    if (!this.canvas) return;
+    this.canvas.ascii();
   }
 }
 

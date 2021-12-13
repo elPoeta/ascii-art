@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 * { 
   margin: 0;
   padding: 0;
 }
 html {
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: 'VT323', monospace;
+}
+
+.workspace {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: center;
 }

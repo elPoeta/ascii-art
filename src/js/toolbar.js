@@ -13,12 +13,15 @@ class Toolbar {
   template() {
     return (
       `<input type="file" name="inputFile" id="inputFile" accept="image/*">
+      <button id="toAscii">Ascii</button>
       `)
   }
 
   addListeners() {
     this.inputFile = document.querySelector('#inputFile');
+    this.toAscii = document.querySelector('#toAscii');
     this.inputFile.addEventListener('change', this.handleOpenFile.bind(this));
+    this.toAscii.addEventListener('click', this.handleToAscii.bind(this));
   }
 
   handleOpenFile(e) {
@@ -40,6 +43,10 @@ class Toolbar {
   isValidMimeType(mimeType) {
     const mimetypes = /image\/png|image\/jpeg|image\/jpg|image\/bmp|imagesvg\+xml|image\/gif|image\/svg\+xml/;
     return mimetypes.test(mimeType);
+  }
+
+  handleToAscii(e) {
+    this.app.convertoAscii();
   }
 }
 
