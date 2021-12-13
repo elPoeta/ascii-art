@@ -39,9 +39,59 @@ class Canvas {
     this.ctx.putImageData(imageData, 0, 0);
   };
 
+  dataToRgba(imgData) {
+    const r = [];
+    const g = [];
+    const b = [];
+    const a = [];
+    for (let i = 0, end = imgData.data.length; i < end; i += 4) {
+      r.push(imgData.data[i]);
+      g.push(imgData.data[i + 1]);
+      b.push(imgData.data[i + 2]);
+      a.push(imgData.data[i + 3]);
+    }
+    return { r, g, b, a, w: imgData.width, h: imgData.height };
+  }
+
+  rgbaToData(imgData) {
+    const img = new ImageData(imgData.w, imgData.h);
+    for (let i = 0, j = 0; i < img.data.length - 3; i += 4, j++) {
+      img.data[i] = imgData.r[j];
+      img.data[i + 1] = imgData.g[j];
+      img.data[i + 2] = imgData.b[j];
+      img.data[i + 3] = imgData.a[j];
+    }
+    return img;
+  }
+
+  contrast() {
+    if (!this.image) return;
+    const data = this.dataToRgba(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
+    const increaseContrast = colorData => {
+      let black = 255, white = 0;
+      for (let i = 0; i < colorData.length; i++) {
+        if (colorData[i] < black) {
+          black = colorData[i];
+        }
+        if (colorData[i] > white) {
+          white = colorData[i];
+        }
+      }
+      for (let i = 0; i < colorData.length; i++) {
+        colorData[i] = (colorData[i] - black) / (white - black) * 255;
+      }
+      return colorData;
+    }
+    data.r = increaseContrast(data.r);
+    data.g = increaseContrast(data.g);
+    data.b = increaseContrast(data.b);
+    this.ctx.putImageData(this.rgbaToData(data), 0, 0);
+  }
+
   ascii() {
     if (!this.image) return;
     this.rgbaToGray();
+    this.contrast();
     const data = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
     const chars = ["@", "%", "#", "*", "+", "=", "-", ":", ".", " "];
     const grayStep = Math.ceil(255 / chars.length);
