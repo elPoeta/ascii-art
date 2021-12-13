@@ -2,7 +2,7 @@ class Canvas {
   constructor(img, workspaceSelector) {
     this.image = img;
     this.workspace = document.querySelector(`#${workspaceSelector}`);
-    this.color = '#000000';
+    this.color = document.querySelector("#color").value;
   }
 
   draw() {

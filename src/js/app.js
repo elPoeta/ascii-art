@@ -42,6 +42,12 @@ class App {
     if (!this.canvas) return;
     this.canvas.ascii();
   }
+
+  changeColor(color) {
+    if (!this.canvas) return;
+    color = color || '#000000';
+    this.canvas.setColor(color);
+  }
 }
 
 export default App;
