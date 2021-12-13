@@ -22,7 +22,7 @@ class Toolbar {
   }
 
   handleOpenFile(e) {
-    if (!e.target.files.length && !this.isValidImage(e.target.files[0].type)) return;
+    if (!e.target.files.length && !this.isValidFile(e.target.files[0])) return;
     const image = e.target.files[0];
     const url = window.URL || window.webkitURL;
     const img = new Image();
@@ -33,11 +33,14 @@ class Toolbar {
 
   }
 
-  isValidImage(mimeType) {
+  isValidFile(file) {
+    return this.isValidMimeType(file.type);
+  }
+
+  isValidMimeType(mimeType) {
     const mimetypes = /image\/png|image\/jpeg|image\/jpg|image\/bmp|imagesvg\+xml|image\/gif|image\/svg\+xml/;
     return mimetypes.test(mimeType);
   }
-
 }
 
 export default Toolbar
