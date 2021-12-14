@@ -30,11 +30,11 @@ class App {
     this.toolbar.render();
   }
 
-  createCanvas(img) {
+  createCanvas(img, fileName) {
     const oldCanvas = document.getElementsByTagName('canvas')[0];
     if (oldCanvas)
       oldCanvas.remove();
-    this.canvas = new Canvas(img, 'workspace');
+    this.canvas = new Canvas(img, fileName, 'workspace');
     this.canvas.draw();
   }
 
@@ -47,6 +47,16 @@ class App {
     if (!this.canvas) return;
     color = color || '#000000';
     this.canvas.setColor(color);
+  }
+
+  contrast() {
+    if (!this.canvas) return;
+    this.canvas.contrast();
+  }
+
+  save() {
+    if (!this.canvas) return;
+    this.canvas.saveToPng();
   }
 }
 

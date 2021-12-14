@@ -1,6 +1,7 @@
 class Canvas {
-  constructor(img, workspaceSelector) {
+  constructor(img, fileName, workspaceSelector) {
     this.image = img;
+    this.fileName = fileName;
     this.workspace = document.querySelector(`#${workspaceSelector}`);
     this.color = document.querySelector("#color").value;
   }
@@ -91,7 +92,6 @@ class Canvas {
   ascii() {
     if (!this.image) return;
     this.rgbaToGray();
-    this.contrast();
     const data = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
     const chars = ["@", "%", "#", "*", "+", "=", "-", ":", ".", " "];
     const grayStep = Math.ceil(255 / chars.length);
@@ -109,6 +109,16 @@ class Canvas {
         }
       }
     }
+  }
+
+  saveToPng() {
+    if (!this.image) return;
+    this.canvas.toBlob(blob => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = this.fileName.substring(0, this.fileName.length - 4).replace('.', '') + '-ASCII.png';
+      link.click();
+    });
   }
 
 }

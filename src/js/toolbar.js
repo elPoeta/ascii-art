@@ -15,26 +15,33 @@ class Toolbar {
       `<input type="file" name="inputFile" id="inputFile" accept="image/*">
        <input type="color" id="color" name="color" value="#000000" >
       <button id="toAscii">Ascii</button>
+      <button id="contrast">Contrast</button>
+      <button id="save">Save</button>
       `)
   }
 
   addListeners() {
-    this.inputFile = document.querySelector('#inputFile');
-    this.inputColor = document.querySelector('#color');
-    this.toAscii = document.querySelector('#toAscii');
-    this.inputFile.addEventListener('change', this.handleOpenFile.bind(this));
-    this.inputColor.addEventListener('change', this.handleColor.bind(this));
-    this.toAscii.addEventListener('click', this.handleToAscii.bind(this));
+    this.inputFileBtn = document.querySelector('#inputFile');
+    this.inputColorBtn = document.querySelector('#color');
+    this.toAsciiBtn = document.querySelector('#toAscii');
+    this.contrastBtn = document.querySelector('#contrast');
+    this.saveBtn = document.querySelector('#save');
+    this.inputFileBtn.addEventListener('change', this.handleOpenFile.bind(this));
+    this.inputColorBtn.addEventListener('change', this.handleColor.bind(this));
+    this.toAsciiBtn.addEventListener('click', this.handleToAscii.bind(this));
+    this.contrastBtn.addEventListener('click', this.handleContrast.bind(this));
+    this.saveBtn.addEventListener('click', this.handleSave.bind(this));
   }
 
   handleOpenFile(e) {
     if (!e.target.files.length && !this.isValidFile(e.target.files[0])) return;
     const image = e.target.files[0];
+    const fielName = e.target.files[0].name;
     const url = window.URL || window.webkitURL;
     const img = new Image();
     img.src = url.createObjectURL(image);
     img.onload = () => {
-      this.app.createCanvas(img);
+      this.app.createCanvas(img, fielName);
     };
 
   }
@@ -54,6 +61,14 @@ class Toolbar {
 
   handleToAscii(e) {
     this.app.convertoAscii();
+  }
+
+  handleContrast(e) {
+    this.app.contrast();
+  }
+
+  handleSave(e) {
+    this.app.save();
   }
 }
 
