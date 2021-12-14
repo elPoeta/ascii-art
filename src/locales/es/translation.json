@@ -1,0 +1,10 @@
+{
+  "app": {
+    "name": "ascii-art"
+  },
+  "toolbar": {
+    "ascii": "Ascii",
+    "contrast": "Contraste",
+    "save": "Guardar"
+  }
+}
