@@ -1,8 +1,10 @@
 import Toolbar from "./toolbar.js";
 import Canvas from "./canvas.js";
+import Load from "./load.js";
 class App {
   constructor() {
     this.mainTag = document.querySelector('#main');
+    this.load = Load;
     this.toolbar = null;
     this.canvas = null;
   }
