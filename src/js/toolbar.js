@@ -1,4 +1,4 @@
-
+import Icon from "./icons.js";
 class Toolbar {
   constructor(app, toolbarSelector) {
     this.app = app;
@@ -12,30 +12,40 @@ class Toolbar {
 
   template() {
     return (
-      `<input type="file" name="inputFile" id="inputFile" accept="image/*">
+      `<nav class="nav">
+      <div class="fileChoose-wrapper">
+         <input type="file" name="inputFile" id="inputFile" accept="image/*">
+          ${Icon.getIcon({ name: 'openFolder', id: 'openFile', fill: '#000000', className: 'toolbar-icon' })}
+       </div>
        <input type="color" id="color" name="color" value="#000000" >
-      <button id="toAscii" data-i18n="toolbar.ascii">Ascii</button>
-      <button id="contrast" data-i18n="toolbar.contrast">Contrast</button>
-      <button id="save" data-i18n="toolbar.save">Save</button>
+      ${Icon.getIcon({ name: 'ascii', id: 'toAscii', fill: '#000000', className: 'toolbar-icon' })}
+      ${Icon.getIcon({ name: 'contrast', id: 'contrast', fill: '#000000', className: 'toolbar-icon' })}
+      ${Icon.getIcon({ name: 'save', id: 'save', fill: '#000000', className: 'toolbar-icon' })}
       <label data-i18n="toolbar.lang">Change language:</label>
       <select disabled="true" id="langSelector" name="lang">
         <option value="en">English</option>
         <option value="es">Español</option>
       </select>
-      `)
+      </nav>`)
   }
 
   addListeners() {
     this.inputFileBtn = document.querySelector('#inputFile');
+    this.openFileBtn = document.querySelector('#openFile');
     this.inputColorBtn = document.querySelector('#color');
     this.toAsciiBtn = document.querySelector('#toAscii');
     this.contrastBtn = document.querySelector('#contrast');
     this.saveBtn = document.querySelector('#save');
+    this.openFileBtn.addEventListener('click', this.handleOpenChoose.bind(this));
     this.inputFileBtn.addEventListener('change', this.handleOpenFile.bind(this));
     this.inputColorBtn.addEventListener('change', this.handleColor.bind(this));
     this.toAsciiBtn.addEventListener('click', this.handleToAscii.bind(this));
     this.contrastBtn.addEventListener('click', this.handleContrast.bind(this));
     this.saveBtn.addEventListener('click', this.handleSave.bind(this));
+  }
+
+  handleOpenChoose(e) {
+    this.inputFileBtn.click(e);
   }
 
   handleOpenFile(e) {

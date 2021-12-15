@@ -12,3 +12,44 @@ html {
   margin-top: 2rem;
   justify-content: center;
 }
+.nav{
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 600px;
+  margin: 0 auto;
+}
+
+input[type='file']{
+	display: none;
+}
+.fileChoose-wrapper {
+  display: inline-block;
+}
+
+.toolbar-icon {
+  width: 1em;
+  height: 1em;
+  font-size: 2em;
+  cursor:pointer;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+  background: none;
+}
+input[type="color"]::-moz-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-moz-color-swatch {
+	border-radius: 50%;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border-radius: 50%;
+}
