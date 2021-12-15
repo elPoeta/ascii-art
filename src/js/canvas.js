@@ -1,3 +1,4 @@
+import Load from "./load.js";
 class Canvas {
   constructor(img, fileName, workspaceSelector) {
     this.image = img;
@@ -7,12 +8,17 @@ class Canvas {
   }
 
   draw() {
-    this.canvas = document.createElement('canvas');
-    this.canvas.width = this.image.width;
-    this.canvas.height = this.image.height;
-    this.ctx = this.canvas.getContext('2d');
-    this.ctx.drawImage(this.image, 0, 0);
-    this.workspace.appendChild(this.canvas);
+    Load.start();
+    setTimeout(() => {
+      this.canvas = document.createElement('canvas');
+      this.canvas.width = this.image.width;
+      this.canvas.height = this.image.height;
+      this.ctx = this.canvas.getContext('2d');
+      this.ctx.drawImage(this.image, 0, 0);
+      this.workspace.appendChild(this.canvas);
+      Load.finish();
+    }, 0);
+
   }
 
   getColor() {
@@ -67,58 +73,71 @@ class Canvas {
 
   contrast() {
     if (!this.image) return;
-    const data = this.dataToRgba(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
-    const increaseContrast = colorData => {
-      let black = 255, white = 0;
-      for (let i = 0; i < colorData.length; i++) {
-        if (colorData[i] < black) {
-          black = colorData[i];
+    Load.start();
+    setTimeout(() => {
+      const data = this.dataToRgba(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
+      const increaseContrast = colorData => {
+        let black = 255, white = 0;
+        for (let i = 0; i < colorData.length; i++) {
+          if (colorData[i] < black) {
+            black = colorData[i];
+          }
+          if (colorData[i] > white) {
+            white = colorData[i];
+          }
         }
-        if (colorData[i] > white) {
-          white = colorData[i];
+        for (let i = 0; i < colorData.length; i++) {
+          colorData[i] = (colorData[i] - black) / (white - black) * 255;
         }
+        return colorData;
       }
-      for (let i = 0; i < colorData.length; i++) {
-        colorData[i] = (colorData[i] - black) / (white - black) * 255;
-      }
-      return colorData;
-    }
-    data.r = increaseContrast(data.r);
-    data.g = increaseContrast(data.g);
-    data.b = increaseContrast(data.b);
-    this.ctx.putImageData(this.rgbaToData(data), 0, 0);
+      data.r = increaseContrast(data.r);
+      data.g = increaseContrast(data.g);
+      data.b = increaseContrast(data.b);
+      this.ctx.putImageData(this.rgbaToData(data), 0, 0);
+      Load.finish();
+    }, 0);
   }
 
   ascii() {
     if (!this.image) return;
-    this.rgbaToGray();
-    const data = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
-    const chars = ["@", "%", "#", "*", "+", "=", "-", ":", ".", " "];
-    const grayStep = Math.ceil(255 / chars.length);
-    this.ctx.fillStyle = "white";
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.font = "6px monospace, Courier";
-    this.ctx.fillStyle = this.getColor();
-    for (let i = 0; i < this.canvas.height * 4; i += 4) {
-      for (let j = 0; j < this.canvas.width * 4; j += 4) {
-        for (let x = 0; x < chars.length; x++) {
-          if (data.data[(i * this.canvas.width + j) * 4] < (x * grayStep) + grayStep) {
-            this.ctx.fillText(chars[x], j, i);
-            break;
+    Load.start();
+    setTimeout(() => {
+      this.rgbaToGray();
+      const data = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+      const chars = ["@", "%", "#", "*", "+", "=", "-", ":", ".", " "];
+      const grayStep = Math.ceil(255 / chars.length);
+      this.ctx.fillStyle = "white";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.font = "6px monospace, Courier";
+      this.ctx.fillStyle = this.getColor();
+      for (let i = 0; i < this.canvas.height * 4; i += 4) {
+        for (let j = 0; j < this.canvas.width * 4; j += 4) {
+          for (let x = 0; x < chars.length; x++) {
+            if (data.data[(i * this.canvas.width + j) * 4] < (x * grayStep) + grayStep) {
+              this.ctx.fillText(chars[x], j, i);
+              break;
+            }
           }
         }
       }
-    }
+      Load.finish();
+    }, 0);
   }
 
   saveToPng() {
     if (!this.image) return;
-    this.canvas.toBlob(blob => {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = this.fileName.substring(0, this.fileName.length - 4).replace('.', '') + '-ASCII.png';
-      link.click();
-    });
+    Load.start();
+    setTimeout(() => {
+      this.canvas.toBlob(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = this.fileName.substring(0, this.fileName.length - 4).replace('.', '') + '-ASCII.png';
+        link.click();
+        Load.finish();
+      });
+    }, 0);
+
   }
 
 }

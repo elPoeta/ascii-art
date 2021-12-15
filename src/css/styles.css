@@ -14,8 +14,11 @@ h1 {
 }
 .workspace {
   display: flex;
-  margin-top: 2rem;
   justify-content: center;
+  width: 80%;
+  height: 500px;
+  margin: 2rem auto 2rem auto;
+  overflow: auto;
 }
 .nav{
   align-items: center;
@@ -258,11 +261,14 @@ animation: counter-clockwise 3s infinite linear;
 h3 {
   text-align: center;
   text-transform: uppercase;
-  color: #000000;
+  color: #81259f;
   font-size: 2em;
-  padding-top: 10px;
-  text-shadow: 1px 1px 0px rgb(197, 129, 253);
+  text-shadow: 1px 1px 0px rgb(227 207 243);
   letter-spacing: 4px;
+  background: #111111;
+  border-bottom: 2px solid #6db0ff;
+  border-right: 2px solid #6db0ff;
+  border-left: 2px solid #6db0ff;
 }
 
 @keyframes clockwise {

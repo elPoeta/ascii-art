@@ -1,6 +1,6 @@
 class Load {
 
-  static render() {
+  static start() {
     const div = document.createElement('div');
     div.setAttribute('id', 'working');
     div.setAttribute('class', 'working');
@@ -48,6 +48,11 @@ class Load {
     <h3>Working...</h3>
   </div>`);
   }
+
+  static finish() {
+    document.querySelector('#working').remove();
+  }
+
 }
 
 export default Load;
