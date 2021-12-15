@@ -1,3 +1,6 @@
 import App from "./app.js";
+import Translator from "./translator.js";
 
-const app = new App().render();
+new App().render();
+const translator = new Translator();
+translator.i18Loader();

@@ -14,9 +14,14 @@ class Toolbar {
     return (
       `<input type="file" name="inputFile" id="inputFile" accept="image/*">
        <input type="color" id="color" name="color" value="#000000" >
-      <button id="toAscii">Ascii</button>
-      <button id="contrast">Contrast</button>
-      <button id="save">Save</button>
+      <button id="toAscii" data-i18n="toolbar.ascii">Ascii</button>
+      <button id="contrast" data-i18n="toolbar.contrast">Contrast</button>
+      <button id="save" data-i18n="toolbar.save">Save</button>
+      <label data-i18n="toolbar.lang">Change language:</label>
+      <select disabled="true" id="langSelector" name="lang">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
       `)
   }
 

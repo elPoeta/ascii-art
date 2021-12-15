@@ -5,6 +5,7 @@
   "toolbar": {
     "ascii": "Ascii",
     "contrast": "Contraste",
-    "save": "Guardar"
+    "save": "Guardar",
+    "lang": "Cambiar lenguaje:"
   }
 }
