@@ -324,12 +324,10 @@ h6 {
 }
 
 @media screen and (max-width:900px) {
-  .header {
-    display: none;
-  }
   .root {
     display: grid;
     grid-template-areas: 
+    "head head head head head head"
     "main main main main main main"
     "nav nav nav nav nav nav";
   }
@@ -342,5 +340,12 @@ h6 {
   }
   .nav {
     width: auto;
+  }
+  .header {
+    border-bottom: 2px solid #444;
+  }
+  h1 {
+    font-size: 1.5em;
+    text-align: center;
   }
 }
