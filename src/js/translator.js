@@ -1,9 +1,9 @@
 class Translator {
   constructor() {
     this.langs = ["en", "es"];
-    this.langSelector = document.querySelector("#langSelector");
-    this.langSelector.removeAttribute("disabled");
-    this.langSelector.addEventListener('change', this.handleChangeLanguge.bind(this));
+    this.currentLang = 'en';
+    this.langSelector = document.querySelector("#language");
+    this.langSelector.addEventListener('click', this.handleChangeLanguge.bind(this));
   }
 
   updateContent() {
@@ -35,7 +35,8 @@ class Translator {
   }
 
   handleChangeLanguge(e) {
-    i18next.changeLanguage(e.target.value);
+    this.currentLang = this.currentLang === 'en' ? 'es' : 'en'
+    i18next.changeLanguage(this.currentLang);
   }
 
 }

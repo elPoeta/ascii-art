@@ -13,20 +13,34 @@ class Toolbar {
   template() {
     return (
       `<nav class="nav">
-      <div class="fileChoose-wrapper">
-         <input type="file" name="inputFile" id="inputFile" accept="image/*">
-          ${Icon.getIcon({ name: 'openFolder', id: 'openFile', fill: '#000000', className: 'toolbar-icon' })}
-       </div>
-       <input type="color" id="color" name="color" value="#000000" >
-      ${Icon.getIcon({ name: 'ascii', id: 'toAscii', fill: '#000000', className: 'toolbar-icon' })}
-      ${Icon.getIcon({ name: 'contrast', id: 'contrast', fill: '#000000', className: 'toolbar-icon' })}
-      ${Icon.getIcon({ name: 'save', id: 'save', fill: '#000000', className: 'toolbar-icon' })}
-      <label data-i18n="toolbar.lang">Change language:</label>
-      <select disabled="true" id="langSelector" name="lang">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-      </select>
-      </nav>`)
+      <div>
+        <div class="fileChoose-wrapper">
+           <input type="file" name="inputFile" id="inputFile" accept="image/*">
+            ${Icon.getIcon({ name: 'openFolder', id: 'openFile', fill: '#000000', className: 'toolbar-icon' })}
+         </div>
+        <h6 data-i18n="toolbar.open">Open</h6> 
+      </div>
+      <div>
+        <input type="color" id="color" name="color" value="#000000" >
+        <h6 data-i18n="toolbar.color">Color</h6>
+      </div>
+      <div>
+        ${Icon.getIcon({ name: 'ascii', id: 'toAscii', fill: '#000000', className: 'toolbar-icon' })}
+        <h6 data-i18n="toolbar.ascii">Convert</h6>  
+      </div>
+      <div>
+        ${Icon.getIcon({ name: 'contrast', id: 'contrast', fill: '#000000', className: 'toolbar-icon' })}
+          <h6 data-i18n="toolbar.contrast">Contrast</h6>
+      </div>
+      <div>
+        ${Icon.getIcon({ name: 'save', id: 'save', fill: '#000000', className: 'toolbar-icon' })}
+        <h6 data-i18n="toolbar.save">Save</h6>
+      </div>
+      <div>
+        ${Icon.getIcon({ name: 'language', id: 'language', fill: '#000000', className: 'toolbar-icon' })}
+        <h6 data-i18n="toolbar.lang">Language</h6>
+      </div>
+      </nav>`);
   }
 
   addListeners() {

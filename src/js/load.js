@@ -6,6 +6,7 @@ class Load {
     div.setAttribute('class', 'working');
     div.innerHTML = Load.template();
     document.querySelector('body').appendChild(div);
+    document.querySelector('#loadtext').innerHTML = i18next.t('toolbar.working');
   }
 
   static template() {
@@ -45,7 +46,7 @@ class Load {
         </div>
       </div>
     </div>
-    <h3>Working...</h3>
+    <h3 id="loadtext" data-i18n="toolbar.working">Working...</h3>
   </div>`);
   }
 
