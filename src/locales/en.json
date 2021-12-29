@@ -3,9 +3,12 @@
     "name": "ascii-art"
   },
   "toolbar": {
-    "ascii": "Ascii",
-    "contrast": "contrast",
+    "open": "Open",
+    "color": "Color",
+    "ascii": "Convert",
+    "contrast": "Contrast",
     "save": "Save",
-    "lang": "Change language:"
+    "lang": "Language",
+    "working": "Working"
   }
 }

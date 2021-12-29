@@ -12,6 +12,13 @@ html {
 h1 {
   letter-spacing: 4px;
 }
+.root {
+  display: grid;
+  grid-template-areas: 
+  "head head head head head head"
+  "nav nav nav nav nav nav"
+  "main main main main main main";
+}
 .workspace {
   display: flex;
   justify-content: center;
@@ -21,12 +28,25 @@ h1 {
   overflow: auto;
 }
 .nav{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
   align-items: center;
-  display: flex;
-  justify-content: space-evenly;
   width: 600px;
   margin: 0 auto;
 }
+
+.header {
+  grid-area: head;
+  }
+  
+.toolbar {
+  grid-area: nav;
+  }
+  
+.workspace {
+  grid-area: main;
+  }
 
 input[type='file']{
 	display: none;
@@ -270,7 +290,10 @@ h3 {
   border-right: 2px solid #6db0ff;
   border-left: 2px solid #6db0ff;
 }
-
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
 @keyframes clockwise {
   0% {
     -moz-transform: rotate(0deg);
@@ -300,3 +323,29 @@ h3 {
   }
 }
 
+@media screen and (max-width:900px) {
+  .root {
+    display: grid;
+    grid-template-areas: 
+    "head head head head head head"
+    "main main main main main main"
+    "nav nav nav nav nav nav";
+  }
+  .toolbar {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    border-top: 2px solid #444;
+    padding-top: 10px;
+  }
+  .nav {
+    width: auto;
+  }
+  .header {
+    border-bottom: 2px solid #444;
+  }
+  h1 {
+    font-size: 1.5em;
+    text-align: center;
+  }
+}

@@ -1,10 +1,8 @@
 import Toolbar from "./toolbar.js";
 import Canvas from "./canvas.js";
-import Load from "./load.js";
 class App {
   constructor() {
     this.mainTag = document.querySelector('#main');
-    this.load = Load;
     this.toolbar = null;
     this.canvas = null;
   }
@@ -17,7 +15,7 @@ class App {
 
   template() {
     return (
-      `<header><h1>Ascii Art</h1></header>
+      `<header class="header"><h1>Ascii Art</h1></header>
       <section id="toolbar" class="toolbar"></section>
       <section id="workspace" class="workspace"></section>`
     );
